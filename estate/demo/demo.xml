@@ -1,0 +1,13 @@
+<odoo>
+    <record id="estate_property_demo_1" model = "estate.property">
+        <field name="name">Sea View Villa</field>
+        <field name="expected_price">500000</field>
+        <field name="bedrooms">3</field>
+        <field name="living_area">120</field>
+        <field name="facades">2</field>
+        <field name="garage">True</field>
+        <field name="garden">True</field>
+        <field name="garden_area">50</field>
+
+    </record>
+</odoo>
