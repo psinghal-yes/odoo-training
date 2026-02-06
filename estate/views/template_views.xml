@@ -1,0 +1,53 @@
+<odoo>
+    <template id="estate_property_template">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="doc">
+                <h2> <span>Property :</span> <span t-out="doc.name"/> </h2>
+                <p><span>Salesperson :</span> <span t-out="doc.salesperson_id.name"/> </p>
+                <h3>Offers: </h3>
+                <t t-if="doc.state=='sold'">
+                    <t t-foreach="doc.offer_ids" t-as="offer">
+                        <t t-if="offer.status=='accepted'">
+                            <t t-set="accepted_offer" t-value="offer"/>
+                            <table t-att="'border','1px'">
+                                <tr>
+                                    <th>Price</th>
+                                    <th>Sold To</th>
+                                    <th>Property Name</th>
+                                </tr>
+
+                                <tr>
+                                    <th t-out="offer.price"/>
+                                    <th t-out="offer.partner_id.name"/>
+                                    <th t-out="offer.property_id.name"/>
+                                </tr>
+                            </table>
+                        </t>
+                    </t>
+                </t>
+
+            </t>
+        </t>
+    </template>
+
+    <template id="estate_property_template_inherit"
+              inherit_id="estate.estate_property_template">
+
+        <xpath expr="//table" position="after">
+            <span>This offer is:</span>
+            <span t-out="accepted_offer.status"/>
+        </xpath>
+
+    </template>
+
+
+<record id="action_property_template" model="ir.actions.report">
+    <field name="name">Property Brochure</field>
+    <field name="model">estate.property</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">estate.estate_property_template</field>
+    <field name="report_file">estate.estate_property_template</field>
+    <field name="binding_model_id" ref="model_estate_property"/>
+    <field name="binding_type">report</field>
+</record>
+</odoo>
