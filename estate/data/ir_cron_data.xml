@@ -1,5 +1,5 @@
-<!--<odoo>-->
-<!--   <data noupdate="1">-->
+<odoo>
+   <data noupdate="1">
 <!--       <record id="daily_task_arrange" model="ir.cron">-->
 <!--           <field name="name">Daily Tasks</field>-->
 <!--           <field name="model_id" ref="model_res_partner"/>-->
@@ -12,5 +12,18 @@
 <!--                  eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 12:00:00')"/>-->
 <!--           <field name="priority">1</field>-->
 <!--       </record>-->
-<!--   </data>-->
-<!--</odoo>-->
+
+       <record id="cron_remove_expired_offers" model="ir.cron">
+            <field name="name">Removal of Expired Offers</field>
+           <field name="model_id" ref="model_estate_property_offer"/>
+           <field name="state">code</field>
+           <field name="code">estate.property.offer._cron_remove_expired_offers()</field>
+           <field name="interval_number">1</field>
+           <field name="interval_type">days</field>
+           <field name="numbercall">-1</field>
+           <field name="active">True</field>
+           <field name="nextcall" eval="(DateTime.now()+timedelta(days=1)).strftime('%Y-%m-%d 12:01:00')"/>
+       </record>
+   </data>
+</odoo>
+
