@@ -58,3 +58,10 @@ class EstatePropertyOffer(models.Model):
                 offer.property_id.state = 'offer_received'
 
         return offers
+
+    def _cron_remove_expired_offers(self):
+        today = fields.Date.today()
+
+        expired_offers = self.search([('date_deadline', '<', today), ('status', '!=', 'accepted')])
+
+        expired_offers.unlink()

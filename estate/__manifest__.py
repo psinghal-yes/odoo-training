@@ -11,6 +11,8 @@
         'security/ir.model.access.csv',
         'views/estate_property_views.xml',
         'views/estate_sequence.xml',
-        'views/assignment9.xml'
+        'views/assignment9.xml',
+        'data/ir_cron_data.xml',
+        'views/template_views.xml'
     ]
 }
